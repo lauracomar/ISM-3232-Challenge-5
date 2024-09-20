@@ -10,3 +10,7 @@ const inventory = [
     { name: 'Mocha', price: 5, quantity: 4 }
 
 ]; // inventory array using sample data provided
+
+//Task 2: Create an Orders Array of Order Objects
+const orders = [];
+// empty array that will store the information of the following steps
