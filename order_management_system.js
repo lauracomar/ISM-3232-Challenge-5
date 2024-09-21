@@ -15,14 +15,14 @@ const orders = [];
 // Task 3: Create a Function to Place an Order
 function placeOrder(customerName, orderedItems) {
     for (let item of orderedItems) {
-        let product = inventory.find(pdct => pdct.name === item.name);//find the item in the inventory array in task 1
+        let product = inventory.find(pdct => pdct.name === item.name);//find product item in inventory array in task 1
         if (!product || product.quantity < item.quantity) { //if an item is not founf or if quantity order is more than available
             console.log('Item not found/not available');
         }
     };
     orderedItems.forEach(item => {
         let product = inventory.find(pdct => pdct.name === item.name);
-        product.quantity -= item.quantity; // finds item in inventory and updates quantity status 
+        product.quantity -= item.quantity; // find product item in inventory array and updates quantity status 
     });
     orders.push({
         CustomerName: customerName,
@@ -31,3 +31,12 @@ function placeOrder(customerName, orderedItems) {
     }); // place order therefore adding order details to orders array
     console.log('Order placed');
 };
+
+// Task 4: Create a Function to Calculate Total for an Order
+function caculateOrderTotal(order) {
+    return order.items.reduce((total, item) => {
+        let product = inventory.find(pdct => pdct.name === item.name); // find product item in inventory array
+        return total + (product.price * item.quantity); // calculate order total
+    }, 0);
+};
+
