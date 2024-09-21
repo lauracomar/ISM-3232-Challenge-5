@@ -25,16 +25,16 @@ function placeOrder(customerName, orderedItems) {
         product.quantity -= item.quantity; // find product item in inventory array and updates quantity status 
     });
     orders.push({
-        CustomerName: customerName,
-        Items: orderedItems,
-        status: 'pending',
+        customerName,
+        orderedItems,
+        status: 'Pending',
     }); // place order therefore adding order details to orders array
     console.log('Order placed');
 };
 
 // Task 4: Create a Function to Calculate Total for an Order
-function caculateOrderTotal(order) {
-    return order.items.reduce((total, item) => {
+function calculateOrderTotal(order) {
+    return order.orderedItems.reduce((total, item) => {
         let product = inventory.find(pdct => pdct.name === item.name); // find product item in inventory array
         return total + (product.price * item.quantity); // calculate order total
     }, 0);
@@ -49,3 +49,18 @@ function completeOrder(customerName) {
     }
     else { console.log(`${customerName} order was not found`) }; // message if order is not found 
 };
+
+//Task 6: Create a Function to Check Pending Orders
+function checkPendingOrders() {
+    orders.forEach(order => { // check each order to find order with Pending status
+        if (order.status === 'Pending') {
+            console.log('Pending order', order.orderedItems); // list Pending orders
+        };
+    });
+};
+
+//test
+placeOrder('Laura', [{ name: 'Espresso', quantity: 3 }]);
+console.log(calculateOrderTotal(orders[0]));
+completeOrder('Laura');
+checkPendingOrders();
